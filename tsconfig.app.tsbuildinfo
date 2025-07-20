@@ -1,0 +1,1 @@
+{"root":["./src/app.jsx","./src/main.tsx","./src/vite-env.d.ts","./src/components/friendlist/friendlist.jsx","./src/components/friendlistitem/friendlistitem.jsx","./src/components/profile/profile.jsx","./src/components/transactionhistory/transactionhistory.jsx"],"version":"5.8.3"}
