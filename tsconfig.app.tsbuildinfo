@@ -1,1 +1,1 @@
-{"root":["./src/app.jsx","./src/main.tsx","./src/vite-env.d.ts","./src/components/friendlist/friendlist.jsx","./src/components/friendlistitem/friendlistitem.jsx","./src/components/profile/profile.jsx","./src/components/transactionhistory/transactionhistory.jsx"],"version":"5.8.3"}
+{"root":["./src/app.jsx","./src/main.tsx","./src/vite-env.d.ts","./src/components/description/description.jsx","./src/components/feedback/feedback.jsx","./src/components/notification/notification.jsx","./src/components/options/options.jsx"],"version":"5.8.3"}
