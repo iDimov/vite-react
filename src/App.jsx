@@ -1,54 +1,98 @@
 import { useState, useEffect } from 'react';
-import ContactForm from './components/ContactForm/ContactForm';
-import ContactList from './components/ContactList/ContactList';
-import SearchBox from './components/SearchBox/SearchBox';
+import { Toaster } from 'react-hot-toast';
+import SearchBar from './components/SearchBar/SearchBar';
+import ImageGallery from './components/ImageGallery/ImageGallery';
+import LoadMoreBtn from './components/LoadMoreBtn/LoadMoreBtn';
+import Loader from './components/Loader/Loader';
+import ErrorMessage from './components/ErrorMessage/ErrorMessage';
+import ImageModal from './components/ImageModal/ImageModal';
+import { searchImages } from './services/unsplash-api';
 import './App.css';
 
-const initialContacts = [
-  {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
-  {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
-  {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
-  {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
-];
-
 function App() {
-  const [contacts, setContacts] = useState(() => {
-    const savedContacts = localStorage.getItem('contacts');
-    return savedContacts ? JSON.parse(savedContacts) : initialContacts;
-  });
-  
-  const [filter, setFilter] = useState('');
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [query, setQuery] = useState('');
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
+  const handleSearch = async (searchQuery) => {
+    if (searchQuery.trim() === '') {
+      return;
+    }
 
-  const addContact = (newContact) => {
-    setContacts(prevContacts => [...prevContacts, newContact]);
+    setQuery(searchQuery);
+    setPage(1);
+    setImages([]);
+    setError(null);
+    setLoading(true);
+
+    try {
+      const data = await searchImages(searchQuery, 1);
+      setImages(data.results);
+      setTotalPages(data.total_pages);
+    } catch (err) {
+      setError('Failed to fetch images. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const deleteContact = (contactId) => {
-    setContacts(prevContacts => 
-      prevContacts.filter(contact => contact.id !== contactId)
-    );
+  const handleLoadMore = async () => {
+    const nextPage = page + 1;
+    setLoading(true);
+    setError(null);
+
+    try {
+      const data = await searchImages(query, nextPage);
+      setImages(prevImages => [...prevImages, ...data.results]);
+      setPage(nextPage);
+    } catch (err) {
+      setError('Failed to load more images. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const visibleContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter.toLowerCase())
-  );
+  const openModal = (image) => {
+    setSelectedImage(image);
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+    setSelectedImage(null);
+  };
+
+  const hasMoreImages = page < totalPages;
+  const showLoadMore = images.length > 0 && !loading && hasMoreImages;
 
   return (
-    <div className="container">
-      <h1>Phonebook</h1>
-      <div className="main-content">
-        <div className="left-section">
-          <SearchBox value={filter} onFilter={setFilter} />
-          <ContactList contacts={visibleContacts} onDelete={deleteContact} />
-        </div>
-        <div className="right-section">
-          <ContactForm onAdd={addContact} />
-        </div>
-      </div>
+    <div className="app">
+      <SearchBar onSubmit={handleSearch} />
+      
+      {error && <ErrorMessage message={error} />}
+      
+      {images.length > 0 && (
+        <ImageGallery images={images} onImageClick={openModal} />
+      )}
+      
+      {loading && <Loader />}
+      
+      {showLoadMore && <LoadMoreBtn onClick={handleLoadMore} />}
+      
+      {selectedImage && (
+        <ImageModal
+          isOpen={modalIsOpen}
+          onClose={closeModal}
+          image={selectedImage}
+        />
+      )}
+      
+      <Toaster position="top-right" />
     </div>
   );
 }
