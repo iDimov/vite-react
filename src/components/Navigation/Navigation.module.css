@@ -1,0 +1,49 @@
+.nav {
+  display: flex;
+  gap: 30px;
+  padding: 20px 0;
+  background: var(--primary-color);
+  box-shadow: var(--shadow-md);
+  margin-bottom: 30px;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav::before {
+  content: '🎬';
+  font-size: 28px;
+  margin-left: 20px;
+  margin-right: 10px;
+}
+
+.link {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: var(--radius);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  position: relative;
+}
+
+.link:hover {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.active {
+  composes: link;
+  color: var(--primary-color);
+  background: var(--accent-color);
+}
+
+.active:hover {
+  background: var(--secondary-color);
+  color: #fff;
+}
