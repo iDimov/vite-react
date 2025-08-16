@@ -1,30 +1,28 @@
-import { useState } from 'react'
-import Example from './components/Example'
+import ContactForm from './components/ContactForm'
+import ContactList from './components/ContactList'
+import SearchBox from './components/SearchBox'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Welcome to React + Vite</h1>
-        <p>Ready to build something amazing!</p>
-        <div className="card">
-          <button onClick={() => setCount((count) => count + 1)}>
-            Count is {count}
-          </button>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test HMR
-          </p>
+        <h1>Contact Book</h1>
+      </header>
+      
+      <div className="content-wrapper">
+        <div className="left-column">
+          <ContactForm />
         </div>
         
-        <Example />
-        
-        <p className="read-the-docs">
-          Click on the Vite and React logos to learn more
-        </p>
-      </header>
+        <div className="right-column">
+          <SearchBox />
+          
+          <div className="contacts-section">
+            <ContactList />
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
