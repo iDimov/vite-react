@@ -1,0 +1,117 @@
+.button {
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #ccc;
+  color: #666;
+  
+  &:hover {
+    background-color: #ccc;
+  }
+}
+
+/* Common button styles */
+.viewNow,
+.send,
+.search {
+  background-color: var(--button);
+  color: var(--text-white);
+  border-radius: 200px;
+  transition: background-color 0.3s ease;
+  
+  &:hover {
+    background-color: var(--hover);
+  }
+}
+
+.viewNow {
+  width: 140px;
+  height: 50px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.08px;
+}
+
+.showMore,
+.loadMore {
+  width: 166px;
+  height: 56px;
+  border-radius: 200px;
+}
+
+.showMore {
+  background-color: var(--button);
+  color: var(--text-white);
+  transition: background-color 0.3s ease;
+  
+  &:hover {
+    background-color: var(--hover);
+  }
+}
+
+.loadMore {
+  margin: 0 auto;
+  border: 1px solid var(--border);
+  background-color: transparent;
+  transition: border-color 0.3s ease;
+  
+  &:hover {
+    border-color: var(--hover);
+  }
+}
+
+.favourites {
+  background-color: transparent;
+}
+
+.search {
+  margin: 0 auto;
+  width: 166px;
+  height: 56px;
+}
+
+.filterModal {
+  display: none;
+}
+
+.close {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  background-color: transparent;
+  transition: color 0.3s ease;
+  
+  &:hover {
+    color: var(--hover);
+  }
+}
+
+.send {
+  width: 140px;
+  height: 50px;
+  margin: 0 auto;
+}
+
+.scrollToTop {
+  position: fixed;
+  bottom: 58px;
+  right: 58px;
+  width: 50px;
+  height: 50px;
+  background-color: var(--button);
+  color: var(--text-white);
+  border-radius: 50%;
+  z-index: 999;
+  transition: background-color 0.3s ease;
+  
+  &:hover {
+    background-color: var(--hover);
+  }
+}

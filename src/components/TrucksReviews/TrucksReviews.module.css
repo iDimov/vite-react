@@ -1,0 +1,53 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+  margin-top: 30px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.avatarNameStar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background-dark);
+  color: red;
+}
+
+.nameStar {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+@media (min-width: 768px) {
+  .list {
+    margin-top: 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .list {
+    flex: 1;
+  }
+}
+
+@media (min-width: 1440px) {
+  .list {
+    margin-top: 56px;
+  }
+}

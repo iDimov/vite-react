@@ -1,0 +1,15 @@
+.item {
+  background-color: var(--background-dark);
+  padding: 5px 10px;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (min-width: 768px) {
+  .item {
+    padding: 12px 18px;
+  }
+}

@@ -1,0 +1,24 @@
+.container {
+  border-bottom: 1px solid var(--border);
+  padding: 10px;
+}
+
+.p {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: center;
+}
+
+.timer {
+  text-align: center;
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 24px;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+}

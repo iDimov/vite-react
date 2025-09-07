@@ -1,0 +1,58 @@
+.header {
+  background-color: var(--background-light);
+  height: 72px;
+  width: 100%;
+}
+
+.headerContent {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 64px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.logoCont {
+  position: absolute;
+  left: 64px;
+}
+
+.logo {
+  width: 200px;
+  height: auto;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+}
+
+.link {
+  color: var(--text-dark);
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  
+  &:hover {
+    color: var(--hover);
+  }
+}
+
+.active {
+  color: var(--text-active);
+}
+
+@media (max-width: 1300px) {
+  .headerContent {
+    padding: 0 32px;
+  }
+  
+  .logoCont {
+    left: 32px;
+  }
+}

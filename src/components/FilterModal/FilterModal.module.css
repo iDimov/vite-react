@@ -1,0 +1,27 @@
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+}
+
+.modalContent {
+  background: white;
+  border-radius: 12px;
+  height: 90%;
+  margin-top: 10px;
+  position: relative;
+  padding-top: 20px;
+  min-width: 350px;
+  display: flex;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .modalOverlay {
+    justify-content: flex-end;
+    padding-right: 10px;
+  }
+}
