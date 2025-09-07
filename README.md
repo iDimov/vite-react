@@ -129,18 +129,6 @@ The application uses environment variables for configuration. The API base URL i
 - `redux-persist` - State persistence
 - `clsx` - Conditional classNames
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Open a pull request
-
-## 📄 License
-
-This project is private and proprietary.
-
 ---
 
 Built with ❤️ using React and TypeScript
