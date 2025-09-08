@@ -20,21 +20,26 @@ export const selectFilteredTrucks = createSelector(
     featuresFilter: string[] = []
   ): Truck[] => {
     return trucks.filter((truck) => {
-      const matchesLocation = truck.location
-        ? truck.location.toLowerCase().includes(locationFilter.toLowerCase())
-        : false;
+      const matchesLocation = !locationFilter || locationFilter.trim() === "" 
+        ? true 
+        : truck.location
+          ? truck.location.toLowerCase().includes(locationFilter.toLowerCase())
+          : false;
 
-      const matchesForm = formFilter ? truck.form === formFilter : true;
+      const matchesForm = !formFilter || formFilter === "" 
+        ? true 
+        : truck.form === formFilter;
 
-      const matchesFeatures = featuresFilter.every((feature) => {
-        if (feature === "automatic") {
-          return truck.transmission === "automatic";
-        }
-
-        // Check if the feature exists on the truck as a boolean property
-        const value = truck[feature as keyof Truck];
-        return value === true;
-      });
+      const matchesFeatures = featuresFilter.length === 0 
+        ? true
+        : featuresFilter.every((feature) => {
+            if (feature === "automatic") {
+              return truck.transmission === "automatic";
+            }
+            
+            const value = truck[feature as keyof Truck];
+            return value === true;
+          });
 
       return matchesLocation && matchesForm && matchesFeatures;
     });

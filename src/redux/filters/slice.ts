@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const initialState = {  
   filters: {
     features: [],
-    form: "",
+    form: null,
     location: "",
   },  
 };

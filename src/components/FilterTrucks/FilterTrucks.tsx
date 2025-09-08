@@ -20,55 +20,33 @@ const FilterTrucks: React.FC = () => {
   const formOptions = typeData.map((type) => type.key);
   const [isSearching, setIsSearching] = useState(false);
   const [searchLocked, setSearchLocked] = useState(false);
-  const [defaultLocation, setDefaultLocation] = useState("Kyiv");
+  const [defaultLocation, setDefaultLocation] = useState("");
 
-  // Set default location on mount
   useEffect(() => {
-    // Try to get user's location
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           try {
-            // Use reverse geocoding API to get city name from coordinates
             const response = await fetch(
               `https://nominatim.openstreetmap.org/reverse?lat=${position.coords.latitude}&lon=${position.coords.longitude}&format=json`
             );
             const data = await response.json();
-            const city = data.address?.city || data.address?.town || data.address?.village || "Kyiv";
+            const city = data.address?.city || data.address?.town || data.address?.village || "";
             setDefaultLocation(city);
-            // If filters don't have a location yet, set the default
-            if (!filters.location) {
-              dispatch(changeFilter({ ...filters, location: city }));
-            }
           } catch (error) {
             console.error("Error getting location:", error);
-            // Fallback to Kyiv
-            if (!filters.location) {
-              dispatch(changeFilter({ ...filters, location: "Kyiv" }));
-            }
-          }
-        },
-        () => {
-          // If user denies location access, use Kyiv as default
-          if (!filters.location) {
-            dispatch(changeFilter({ ...filters, location: "Kyiv" }));
           }
         }
       );
-    } else {
-      // If geolocation is not available, use Kyiv
-      if (!filters.location) {
-        dispatch(changeFilter({ ...filters, location: "Kyiv" }));
-      }
     }
-  }, [dispatch, filters]);
+  }, []);
 
   return (
     <Formik
       key={JSON.stringify(filters)}       
       enableReinitialize                 
       initialValues={{
-        location: filters.location || defaultLocation,
+        location: filters.location || "",
         features: filters.features || [],
         form: filters.form || "",
       }}
